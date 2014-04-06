@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="MacRoman" standalone="no"?>
+<jardesc>
+    <jar path="p5-MSAFluid/library/MSAFluid.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/p5-MSAFluid/library/MSAFluid.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/p5-MSAFluid/library/MANIFEST.MF" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <file path="/p5-MSAFluid/build.xml"/>
+        <javaElement handleIdentifier="=p5-MSAFluid/src"/>
+        <file path="/p5-MSAFluid/.classpath"/>
+        <file path="/p5-MSAFluid/.project"/>
+        <file path="/p5-MSAFluid/javadoc.xml"/>
+    </selectedElements>
+</jardesc>

@@ -30,7 +30,8 @@
  * ***********************************************************************/ 
 
 import java.nio.FloatBuffer;
-import com.sun.opengl.util.*;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 boolean renderUsingVA = true;
 
@@ -56,22 +57,22 @@ class ParticleSystem {
     Particle[] particles;
 
     ParticleSystem() {
+        int SIZEOF_FLOAT = 4;
+
         particles = new Particle[maxParticles];
         for(int i=0; i<maxParticles; i++) particles[i] = new Particle();
         curIndex = 0;
 
-        posArray = BufferUtil.newFloatBuffer(maxParticles * 2 * 2);// 2 coordinates per point, 2 points per particle (current and previous)
-        colArray = BufferUtil.newFloatBuffer(maxParticles * 3 * 2);
+        posArray = ByteBuffer.allocateDirect(maxParticles * 2 * 2 * SIZEOF_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();// 2 coordinates per point, 2 points per particle (current and previous)
+        colArray = ByteBuffer.allocateDirect(maxParticles * 3 * 2 * SIZEOF_FLOAT).order(ByteOrder.nativeOrder()).asFloatBuffer();
     }
 
 
     void updateAndDraw(){
-        //OPENGL Processing 2.0
-        GL2 gl;
-        PGraphicsOpenGL pg = (PGraphicsOpenGL) g;         // processings opengl graphics object
-        PGL pgl = pg.beginPGL();                // JOGL's GL object
-        gl = pgl.gl.getGL().getGL2();
-        
+        //OPENGL Processing 2.x
+        // changes according to http://wiki.processing.org/w/Vertex_Buffer_Object_(VBO)
+        PJOGL pgl = (PJOGL)beginPGL();
+        GL2 gl = pgl.gl.getGL2(); 
         gl.glEnable( GL.GL_BLEND );             // enable blending
         if(!drawFluid) fadeToColor(gl, 0, 0, 0, 0.05);
 
@@ -107,7 +108,7 @@ class ParticleSystem {
         }
 
         gl.glDisable(GL.GL_BLEND);
-        pg.endPGL();
+        endPGL();
     }
 
 
