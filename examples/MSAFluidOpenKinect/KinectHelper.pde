@@ -26,7 +26,7 @@ import org.openkinect.processing.*;
 class KinectHelper {
 
   Kinect kinect;
-  int kWidth  = 640;
+  int kWidth  = 640; // TODO these could be removed and use displayWidth displayHight
   int kHeight = 480;
   float invKWidth = 1.0f/kWidth;
   float invKHeight = 1.0f/kHeight;
@@ -64,6 +64,7 @@ class KinectHelper {
 
   public void updateKinectDepth(boolean updateDepthPixels)
   {
+    // quick exit if Kinect is not connected
     if (!isKinected) return;
 
     // checks raw depth of kinect: if within certain depth range - color everything white, else black
@@ -103,10 +104,12 @@ class KinectHelper {
     minDepth = constrain(minDepth + deltaDepth, 0, thresholdRange);
     println("minimum depth: " + minDepth);
   }
+  
   private void setMaxDepth(int deltaDepth) {
     maxDepth = constrain(maxDepth + deltaDepth, 0, thresholdRange);
     println("maximum depth: " + maxDepth);
   }
+
   void keyPressed(int key, int keyCode) {
     println("*** KinectHelp called: " + key);
     if (key == CODED) {
