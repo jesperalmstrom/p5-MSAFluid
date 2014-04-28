@@ -56,7 +56,7 @@ ParticleSystem particleSystem;
 KinectFlow flowField;
 PImage imgFluid;
 
-boolean drawFluid = false;
+boolean drawFluid = true;
 boolean useMouse = true; 
 
 void setup() {
@@ -97,15 +97,17 @@ void mouseMoved() {
   addForce(mouseNormX, mouseNormY, mouseVelX, mouseVelY);
 }
 
+void mousePressed() {
+  // early exit if the kinect is used
+  if (!useMouse)
+    return;
+  drawFluid ^= true;
+}
+
 void draw() {
   fluidSolver.update();
 
   if (drawFluid) {
-    // updates the kinect raw depth
-    flowField.kinectH.updateKinectDepth(false);
-    // updates the optical flow vectors from the kinecter depth image (want to update optical flow before particles)
-    flowField.update();
-
     for (int i=0; i<fluidSolver.getNumCells(); i++) {
       int d = 2;
       imgFluid.pixels[i] = color(fluidSolver.r[i] * d, fluidSolver.g[i] * d, fluidSolver.b[i] * d);
@@ -114,25 +116,11 @@ void draw() {
     image(imgFluid, 0, 0, width, height);
 
   } 
-  else {  
-    // updates the kinect raw depth + pixels
-    flowField.kinectH.updateKinectDepth(true);
-    // display instructions for adjusting kinect depth image
-    flowField.instructionScreen();
-    // want to see the optical flow after depth image drawn.
-    flowField.update();
 
-  }
   particleSystem.updateAndDraw();
-
+  flowField.draw();
 }
 
-void mousePressed() {
-  // early exit if the kinect is used
-  if (!useMouse)
-    return;
-  drawFluid ^= true;
-}
 
 void keyPressed() {
   switch(key) {
@@ -141,8 +129,8 @@ void keyPressed() {
     println("renderUsingVA: " + renderUsingVA);
     break;
   case ' ':
-    drawFluid = true;
     println("MSA... space pressed");
+    drawFluid ^= true;
     break;
   } 
   // call key press for KinectHelper

@@ -110,6 +110,13 @@ class KinectHelper {
     println("maximum depth: " + maxDepth);
   }
 
+
+/**
+ * CONTROLS
+ * Up and Down tilts the kinect
+ * a,z = adjust minimum kinect depth
+ * s,x = adjust maximum kinect depth
+ **/
   void keyPressed(int key, int keyCode) {
     println("*** KinectHelp called: " + key);
     if (key == CODED) {
