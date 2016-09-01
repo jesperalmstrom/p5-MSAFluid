@@ -31,7 +31,7 @@
 
 class Particle {
     final static float MOMENTUM = 0.5;
-    final static float FLUID_FORCE = 0.6;
+    final static float FLUID_FORCE = 0.3;
 
     float x, y;
     float vx, vy;

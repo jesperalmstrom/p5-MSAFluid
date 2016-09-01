@@ -78,7 +78,7 @@ void setup() {
 
   // create particle system
   particleSystem = new ParticleSystem();
-
+ 
   // init and setup OpenKinect
   int resolution = 15;
   flowField = new KinectFlow(resolution, this);
@@ -87,7 +87,7 @@ void setup() {
 
 void mouseMoved() {
   // early exit if the kinect is used
-  if (!useMouse)
+  if (!useMouse || flowField.showSettings)
     return;
   float mouseNormX = mouseX * invWidth;
   float mouseNormY = mouseY * invHeight;
@@ -127,10 +127,6 @@ void keyPressed() {
   case 'r': 
     renderUsingVA ^= true; 
     println("renderUsingVA: " + renderUsingVA);
-    break;
-  case ' ':
-    println("MSA... space pressed");
-    drawFluid ^= true;
     break;
   } 
   // call key press for KinectHelper

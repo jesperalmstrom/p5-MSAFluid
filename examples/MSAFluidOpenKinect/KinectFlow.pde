@@ -73,7 +73,7 @@ class KinectFlow {
     int fps=30;
     float predsec=0.5; // prediction time (sec): larger for longer vector 0.5
 
-      df=predsec*fps;
+    df=predsec*fps;
 
     // arrays
     par = new float[cols*rows];
@@ -121,12 +121,12 @@ class KinectFlow {
   void draw() {
     // updates the kinect raw depth + pixels
     kinectH.updateKinectDepth(showSettings);
+    // updates the optical flow vectors from the kinecter depth image (want to update optical flow before particles)
+    update();
     if (showSettings) {
       // display instructions for adjusting kinect depth image
       instructionScreen();
     }
-    // updates the optical flow vectors from the kinecter depth image (want to update optical flow before particles)
-    update();
   }
 
   void instructionScreen() {
@@ -448,7 +448,6 @@ class KinectFlow {
   }
   // what happens if the key is pressed. 
   void keyPressed(int key, int keyCode) {
-
     if (key == ' ') 
     { 
       println("KinectFlow space pressed");
@@ -458,6 +457,8 @@ class KinectFlow {
       // Inverse the value of boolean
       showSettings ^= true;
       drawOpticalFlow ^= true;
+      println("showSettings " + showSettings);
+      println("drawOpticalFlow " + drawOpticalFlow);
     }
     // call the kinect helper keyPressed
     kinectH.keyPressed(key, keyCode);

@@ -31,11 +31,11 @@ class KinectHelper {
   float invKWidth = 1.0f/kWidth;
   float invKHeight = 1.0f/kHeight;
 
-  int kAngle = -10; // angle to tilt the kinect 
+  int kAngle = -20; // angle to tilt the kinect 
   boolean isKinected = false;
   int[] rawDepth;
   int minDepth = 600;
-  int maxDepth = 800;//995;//982;//818;//860;
+  int maxDepth = 995;//995;//982;//818;//860;
   int thresholdRange = 2047;
 
   PImage depthImg;
@@ -96,7 +96,7 @@ class KinectHelper {
   private void tilt() {
     int maxAngle = 30;
     int minAngle = -30;
-    kAngle = constrain(kAngle, maxAngle, maxAngle);
+    kAngle = constrain(kAngle, minAngle, maxAngle);
     kinect.tilt(kAngle);
   }
 
