@@ -32,13 +32,15 @@
 import java.nio.FloatBuffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import com.jogamp.opengl.GL2;
+import com.jogamp.opengl.GL;
 
 boolean renderUsingVA = true;
 
 void fadeToColor(GL2 gl, float r, float g, float b, float speed) {
     gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
     gl.glColor4f(r, g, b, speed);
-    gl.glBegin(gl.GL_QUADS);
+    gl.glBegin(GL2.GL_QUADS);
     gl.glVertex2f(0, 0);
     gl.glVertex2f(width, 0);
     gl.glVertex2f(width, height);
@@ -76,8 +78,8 @@ class ParticleSystem {
         gl.glEnable( GL.GL_BLEND );             // enable blending
         if(!drawFluid) fadeToColor(gl, 0, 0, 0, 0.05);
 
-        gl.glBlendFunc(gl.GL_ONE, GL.GL_ONE);  // additive blending (ignore alpha)
-        gl.glEnable(gl.GL_LINE_SMOOTH);        // make points round
+        gl.glBlendFunc(GL2.GL_ONE, GL.GL_ONE);  // additive blending (ignore alpha)
+        gl.glEnable(GL2.GL_LINE_SMOOTH);        // make points round
         gl.glLineWidth(1);
 
 
@@ -125,10 +127,3 @@ class ParticleSystem {
     }
 
 }
-
-
-
-
-
-
-

@@ -1,3 +1,4 @@
+
 /***********************************************************************
  
  Demo of the MSAFluid library (www.memo.tv/msafluid_for_processing)
@@ -40,7 +41,7 @@
 import msafluid.*;
 
 import processing.opengl.*;
-import javax.media.opengl.*;
+//import javax.media.opengl.*;
 
 // how big do the screen have to be?
 int screenW = 1024, screenH = 768;
@@ -60,7 +61,7 @@ boolean drawFluid = true;
 boolean useMouse = true; 
 
 void setup() {
-  size(screenW, screenH, P3D);    // use OPENGL rendering for bilinear filtering on texture
+  size(1024, 768, P3D);    // use OPENGL rendering for bilinear filtering on texture
   //    size(screen.width * 49/50, screen.height * 49/50, OPENGL);
   // hint( ENABLE_OPENGL_4X_SMOOTH );    // Turn on 4X antialiasing
 
@@ -173,4 +174,3 @@ void addForce(float x, float y, float dx, float dy) {
 void stop() {
   flowField.stop();
 }
-

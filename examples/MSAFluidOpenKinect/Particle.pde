@@ -28,6 +28,7 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE. 
  *
  * ***********************************************************************/ 
+import com.jogamp.opengl.GL2;
 
 class Particle {
     final static float MOMENTUM = 0.5;
@@ -119,11 +120,3 @@ class Particle {
     }
 
 }
-
-
-
-
-
-
-
-

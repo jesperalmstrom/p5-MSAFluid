@@ -44,11 +44,12 @@ class KinectHelper {
   {
     try {
       kinect = new Kinect(parent);
-      kinect.start();
-      kinect.enableDepth(true);
-      kinect.tilt(kAngle);
+      kinect.initDepth();
+      //kinect.start();
+      //kinect.enableDepth(true);
+      kinect.setTilt(kAngle);
 
-      kinect.processDepthImage(false);
+      //kinect.processDepthImage(false);
 
       isKinected = true;
       println("KINECT IS INITIALISED");
@@ -96,8 +97,8 @@ class KinectHelper {
   private void tilt() {
     int maxAngle = 30;
     int minAngle = -30;
-    kAngle = constrain(kAngle, maxAngle, maxAngle);
-    kinect.tilt(kAngle);
+    kAngle = constrain(kAngle, minAngle, maxAngle);
+    kinect.setTilt(kAngle);
   }
 
   private void setMinDepth(int deltaDepth) {
@@ -154,7 +155,6 @@ class KinectHelper {
 
   public void quit() {
     if (isKinected) 
-      kinect.quit();
+      kinect.stopDepth();
   }
 }
-
